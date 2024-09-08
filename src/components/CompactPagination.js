@@ -8,7 +8,7 @@ const CompactPagination = () => {
   const pageNumbers = [];
   const totalProducts = filteredProducts.length;
   const totalPages = Math.ceil(totalProducts / productsPerPage);
-  const maxPageNumbersToShow = 5; // Adjust this number to show more/less pages
+  const maxPageNumbersToShow = 3; // Adjust this number to show more/less pages
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 

@@ -17,7 +17,7 @@ export const FiltersProvider = ({ children }) => {
   const [customPriceRange, setCustomPriceRange] = useState([0, 2000]);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchPerformed, setSearchPerformed] = useState(false);
-  const productsPerPage = 21;
+  const productsPerPage = 12;
   const { products } = useProducts();
 
   useEffect(() => {
@@ -103,6 +103,7 @@ export const FiltersProvider = ({ children }) => {
         handleSetCategoryFilter,
         filteredProducts,
         currentProducts,
+        productsPerPage,
       }}
     >
       {children}
