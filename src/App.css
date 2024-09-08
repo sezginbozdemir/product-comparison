@@ -1,38 +1,413 @@
-.App {
-  text-align: center;
+padding why ? /* Pagination styles */
+.pagination {
+  --bs-pagination-color: #343436;
+  --bs-pagination-hover-color: #343436;
+  --bs-pagination-focus-color: var(--bs-link-hover-color);
+  --bs-pagination-active-bg: #343436;
+  --bs-pagination-active-border-color: #343436;
+  margin-top: 20px;
 }
 
-.App-logo {
-  height: 40vmin;
+.page-item.disabled .page-link {
   pointer-events: none;
+  cursor: not-allowed;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.page-item.active .page-link {
+  background-color: #dce2e9;
+  border-color: #dce2e9;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+/* Navbar styles */
+
+.nav-link {
+  border-radius: 100px;
+}
+.nav-item.active {
+  background-color: white;
+}
+.navbar .nav-link.active,
+.navbar .dropdown-item.active,
+.navbar-brand.active {
+  margin: 0;
+  background-color: white !important;
+  color: black !important;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.navbar .nav-link.active:hover,
+.navbar .dropdown-item.active:hover,
+.navbar-brand.active:hover {
+  background-color: white !important;
+  color: black !important;
+}
+
+.navbar .dropdown-menu .dropdown-item {
+  transition: background-color 0.3s ease;
+}
+
+.navbar .dropdown-menu .dropdown-item:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+.dropdown-menu.show {
+  margin-top: 9px;
+  width: 81rem;
+  border-radius: 0;
+  background-color: #fff;
+  z-index: 1000;
+}
+
+.navbar-brand img.logo {
+  height: 60px;
+}
+
+.search-results-info {
+  margin-top: 20px;
+  font-size: 18px;
+  text-align: start;
+  color: #333;
+}
+
+.form-inline .search-bar {
+  width: 550px; /* Make the search bar wider */
+  height: 50px;
+  border: solid 1px #dce2e9;
+  border-radius: 0px;
+  border-top-left-radius: 14px; /* Adjust the radius value as needed */
+  border-bottom-left-radius: 14px; /* Adjust the radius value as needed */
+}
+
+.form-inline .search-button {
+  background: white;
+  border: solid 1px #dce2e9;
+  margin-top: 0.5rem;
+  color: #007bff;
+  height: 50px;
+  margin-left: -15px;
+  border-radius: 0px;
+  border-top-right-radius: 14px; /* Adjust the radius value as needed */
+  border-bottom-right-radius: 14px; /* Adjust the radius value as needed */
+}
+
+.second-nav {
+  background: linear-gradient(to right, #ff5f6d, #ffc371);
+  padding: 0;
+  margin: 0;
+  font-weight: 600;
+}
+@media (min-width: 992px) {
+  /* Hide mobile filter bar on larger screens */
+  .second-nav {
+    height: 3.5rem;
   }
-  to {
-    transform: rotate(360deg);
+  #categoriesDropdown {
+    color: black !important;
+    background-color: inherit !important;
   }
+}
+
+.second-nav .nav-link {
+  color: white !important;
+}
+
+.second-nav .dropdown-menu {
+  nav.navbar.navbar-expand-lg.navbar-dark.bg-primary.second-nav {
+    padding: 0;
+  }
+  background: white;
+  color: black;
+}
+
+.second-nav .dropdown-item {
+  color: black !important;
+}
+
+.second-nav .dropdown-item:hover {
+  background-color: #f1f1f1;
+}
+
+/* Filter styles */
+
+/* Styles for the mobile filter bar */
+.filter-bar {
+  font-size: 26px;
+  font-weight: 400;
+  display: flex;
+  overflow-x: auto;
+  padding: 10px;
+  background-color: fff;
+  border-bottom: 1px solid #ddd;
+}
+
+.filter-bar .filter-item {
+  flex: 0 0 auto;
+  margin-right: 10px;
+  padding: 5px 10px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.filter-bar .filter-item.dropdown {
+  position: relative;
+}
+
+.filter-bar .filter-item .dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  transform: translateX(-50%);
+}
+
+.filter-bar .filter-item .dropdown-toggle::after {
+  margin-left: 5px;
+}
+
+@media (min-width: 992px) {
+  /* Hide mobile filter bar on larger screens */
+  .filter-bar {
+    display: none;
+  }
+}
+
+i.fas.fa-chevron-up {
+  font-size: 15px;
+}
+
+i.fas.fa-angle-double-right.mr-2 {
+  font-size: 10px;
+}
+
+.filter-item {
+  padding: 5px;
+  margin: 5px 0;
+  color: #000;
+  display: flex;
+  align-items: center;
+}
+
+.filter-item.active {
+  color: #007bff;
+  font-weight: bold;
+}
+
+.filter-item:hover {
+  color: #0056b3;
+}
+
+.filter-item i {
+  margin-right: 8px;
+}
+
+.mb-4.p-3.rounded.border {
+  border-radius: 5px;
+}
+.mb-3 {
+  border-bottom: 1px #ddd solid;
+  margin-bottom: 2rem !important;
+  padding-bottom: 2rem;
+}
+
+.mb-3 h5 {
+  margin-bottom: 1rem !important;
+  font-size: 1rem;
+}
+
+.form-control {
+  margin-top: 0.5rem;
+}
+.form-control:focus {
+  border-color: #ced4da;
+  box-shadow: none;
+}
+
+/* Optional: Style the select element more distinctively */
+select.form-control {
+  background-color: #f8f9fa;
+  border-color: #ced4da;
+}
+
+.collapsible {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+.content {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+  background-color: #f1f1f1;
+}
+
+.collapsible:after {
+  content: "\002B";
+  color: #777;
+  font-weight: bold;
+  float: right;
+}
+
+.collapsible.active:after {
+  content: "\2212";
+}
+
+.collapsible + .content {
+  display: block;
+}
+
+/* ProductCard styles */
+.card-link {
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+  display: block;
+}
+
+.product-card {
+  transition: transform 0.2s ease-in-out;
+}
+
+.truncate-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.details-button {
+  width: 100px;
+  color: black;
+  font-weight: 400;
+  border: none; /* Remove border */
+  outline: none; /* Remove outline */
+}
+
+/* Ensure the favorite button has no outline and matches styles */
+.favorite-button {
+  color: #dce2e9;
+  border-color: #dce2e9;
+}
+
+/* Style the Font Awesome icon */
+.favorite-icon {
+  color: #dce2e9; /* Change this to your desired color */
+}
+
+/* Optional: Change color on hover */
+.favorite-button:hover {
+  color: #dce2e9; /* Change this to your desired hover color */
+}
+
+/* Ensure the favorite button has no blue outline on focus */
+
+.card {
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-img-top {
+  height: 200px;
+  object-fit: cover;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+
+.card-body {
+  padding: 10px;
+}
+
+.card-title {
+  margin-left: 10px;
+  text-align: start;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 15px;
+  margin-bottom: 0.5rem;
+}
+
+.card-text {
+  text-align: left;
+  margin-bottom: 0.5rem;
+  margin-left: 10px;
+}
+
+.btn-primary {
+  background-color: #dce2e9;
+  border: none;
+  border-radius: 3px;
+  width: 100%;
+  color: #262424;
+  font-weight: 500;
+}
+
+.btn-primary:hover {
+  background-color: #a4abb2;
+}
+.btn-primary:focus {
+  background-color: #a4abb2;
+  box-shadow: none;
+}
+.btn-primary:active {
+  background-color: #a4abb2 !important;
+  box-shadow: none !important;
+}
+.btn-primary:focus-visible {
+  background-color: #a4abb2;
+  box-shadow: none;
+}
+
+.btn-outline-primary {
+  --bs-btn-color: #dce2e9;
+  --bs-btn-border-color: #dce2e9;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #dce2e9;
+  --bs-btn-hover-border-color: #dce2e9;
+  --bs-btn-focus-shadow-rgb: 13, 110, 253;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #dce2e9;
+  --bs-btn-active-border-color: #dce2e9;
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: #dce2e9;
+  --bs-btn-disabled-bg: transparent;
+  --bs-btn-disabled-border-color: #dce2e9;
+  --bs-gradient: none;
+}
+
+/* Hover effect */
+.hover-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
+  background-color: #dce2e9;
+  color: black;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  z-index: 10;
+  white-space: nowrap;
+}
+
+.card-link:hover .hover-text {
+  display: block;
+}
+.navs {
+  position: -webkit-sticky; /* For Safari */
+  position: sticky;
+  top: 0;
+  z-index: 1020; /* Ensure it is above other elements */
 }
