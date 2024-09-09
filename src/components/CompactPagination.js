@@ -1,6 +1,6 @@
 import React from "react";
-import "@fortawesome/fontawesome-free/css/all.min.css"; // Import Font Awesome CSS
 import { useFilters } from "../context/FiltersContext";
+import { Button, ButtonGroup } from "react-bootstrap";
 
 const CompactPagination = () => {
   const { currentPage, setCurrentPage, productsPerPage, filteredProducts } =
@@ -8,9 +8,15 @@ const CompactPagination = () => {
   const pageNumbers = [];
   const totalProducts = filteredProducts.length;
   const totalPages = Math.ceil(totalProducts / productsPerPage);
-  const maxPageNumbersToShow = 3; // Adjust this number to show more/less pages
+  const maxPageNumbersToShow = 4;
 
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
 
   let startPage = Math.max(
     currentPage - Math.floor(maxPageNumbersToShow / 2),
@@ -27,73 +33,56 @@ const CompactPagination = () => {
   }
 
   return (
-    <nav>
-      <ul className="pagination justify-content-center">
+    <div className="d-flex justify-content-center mb-5 mt-4">
+      <ButtonGroup>
         {currentPage > 1 && (
-          <li className="page-item">
-            <button
-              onClick={() => paginate(currentPage - 1)}
-              className="page-link"
-              aria-label="Previous"
-            >
-              <i className="fas fa-chevron-left"></i>
-            </button>
-          </li>
+          <Button
+            onClick={() => paginate(currentPage - 1)}
+            variant="outline-secondary"
+          >
+            <i className="bi bi-chevron-left"></i>
+          </Button>
         )}
         {startPage > 1 && (
           <>
-            <li className="page-item">
-              <button onClick={() => paginate(1)} className="page-link">
-                1
-              </button>
-            </li>
-            {startPage > 2 && (
-              <li className="page-item disabled">
-                <span className="page-link">...</span>
-              </li>
-            )}
+            <Button onClick={() => paginate(1)} variant="outline-secondary">
+              1
+            </Button>
+            {startPage > 2 && <Button variant="outline-secondary">...</Button>}
           </>
         )}
-        {pageNumbers.map((number) => (
-          <li
-            key={number}
-            className={`page-item ${currentPage === number ? "active" : ""}`}
+        {pageNumbers.map((num) => (
+          <Button
+            key={num}
+            onClick={() => paginate(num)}
+            variant={currentPage === num ? "secondary" : "outline-secondary"}
           >
-            <button onClick={() => paginate(number)} className="page-link">
-              {number}
-            </button>
-          </li>
+            {num}
+          </Button>
         ))}
         {endPage < totalPages && (
           <>
             {endPage < totalPages - 1 && (
-              <li className="page-item disabled">
-                <span className="page-link">...</span>
-              </li>
+              <Button variant="outline-secondary">...</Button>
             )}
-            <li className="page-item">
-              <button
-                onClick={() => paginate(totalPages)}
-                className="page-link"
-              >
-                {totalPages}
-              </button>
-            </li>
+            <Button
+              onClick={() => paginate(totalPages)}
+              variant="outline-secondary"
+            >
+              {totalPages}
+            </Button>
           </>
         )}
         {currentPage < totalPages && (
-          <li className="page-item">
-            <button
-              onClick={() => paginate(currentPage + 1)}
-              className="page-link"
-              aria-label="Next"
-            >
-              <i className="fas fa-chevron-right"></i>
-            </button>
-          </li>
+          <Button
+            onClick={() => paginate(currentPage + 1)}
+            variant="outline-secondary"
+          >
+            <i className="bi bi-chevron-right"></i>
+          </Button>
         )}
-      </ul>
-    </nav>
+      </ButtonGroup>
+    </div>
   );
 };
 

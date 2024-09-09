@@ -1,31 +1,55 @@
-import React from "react";
+import React, { useState } from "react";
 import ProductCard from "./ProductCard";
 import CompactPagination from "./CompactPagination";
+import MobileFilterMenu from "./MobileFilters";
 import { useFilters } from "../context/FiltersContext";
+import { useIsMobile } from "../context/IsMobileContext";
+import { Row, Alert, Button } from "react-bootstrap";
 
 function ProductList() {
   const { filteredProducts, currentProducts, searchTerm, searchPerformed } =
     useFilters();
+  const isMobile = useIsMobile();
+  const [showFilter, setShowFilter] = useState(false);
+  const handleShowFilter = () => setShowFilter(true);
+  const handleCloseFilter = () => setShowFilter(false);
 
   return (
-    <div>
-      {searchPerformed && (
-        <div className="search-results-info">
-          {filteredProducts.length > 0 ? (
-            <p>Showing results for: "{searchTerm}"</p>
-          ) : (
-            <p>No results found for: "{searchTerm}"</p>
-          )}
-        </div>
+    <>
+      {isMobile && (
+        <Button variant="secondary" className="mb-3" onClick={handleShowFilter}>
+          <i className="bi bi-funnel"></i> Filters
+        </Button>
       )}
-      <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3">
+
+      {searchPerformed && (
+        <Alert
+          className=""
+          variant={filteredProducts.length > 0 ? "info" : "warning"}
+        >
+          {filteredProducts.length > 0 ? (
+            <p className="m-0">
+              <i className="bi bi-arrow-right-circle"></i> Showing results for:
+              "{searchTerm}"
+            </p>
+          ) : (
+            <p className="m-0">
+              <i className="bi bi-ban"></i> No results found for: "{searchTerm}"
+            </p>
+          )}
+        </Alert>
+      )}
+      <Row className="row row-cols-1 row-cols-sm-2 row-cols-md-3">
         {currentProducts.map((product) => (
-          <ProductCard key={product["id produs"]} product={product} />
+          <ProductCard key={product.id} product={product} />
         ))}
-      </div>
+      </Row>
 
       <CompactPagination />
-    </div>
+
+      {/* Mobile Filter Menu */}
+      <MobileFilterMenu show={showFilter} onHide={handleCloseFilter} />
+    </>
   );
 }
 

@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from "react";
-import { useProducts } from "../context/ProductsContext";
-import { useFilters } from "../context/FiltersContext";
+// MobileFilterMenu.js
+import React from "react";
+import { Offcanvas, Button, Form } from "react-bootstrap";
 import Slider from "rc-slider";
 import Tooltip from "rc-tooltip";
 import "rc-slider/assets/index.css";
 import "rc-tooltip/assets/bootstrap.css";
-import { Button, Form } from "react-bootstrap";
+import { useFilters } from "../context/FiltersContext";
+import { useProducts } from "../context/ProductsContext";
 
-function Filter() {
+function MobileFilterMenu({ show, onHide }) {
   const {
     categoryFilter,
     setCategoryFilter,
@@ -20,11 +21,12 @@ function Filter() {
     setCurrentPage,
   } = useFilters();
   const { uniqueBrands, uniqueCategories } = useProducts();
-  const [tempCategoryFilter, setTempCategoryFilter] = useState(categoryFilter);
-  const [tempBrandFilter, setTempBrandFilter] = useState(brandFilter);
-  const [tempPriceFilter, setTempPriceFilter] = useState(priceFilter);
+  const [tempCategoryFilter, setTempCategoryFilter] =
+    React.useState(categoryFilter);
+  const [tempBrandFilter, setTempBrandFilter] = React.useState(brandFilter);
+  const [tempPriceFilter, setTempPriceFilter] = React.useState(priceFilter);
   const [tempCustomPriceRange, setTempCustomPriceRange] =
-    useState(customPriceRange);
+    React.useState(customPriceRange);
 
   const capitalize = (s) => s.charAt(0).toUpperCase() + s.slice(1);
 
@@ -79,6 +81,7 @@ function Filter() {
     setPriceFilter(tempPriceFilter);
     setCustomPriceRange(tempCustomPriceRange);
     setCurrentPage(1);
+    onHide();
   };
 
   const resetFilters = () => {
@@ -111,19 +114,20 @@ function Filter() {
   ];
 
   return (
-    <>
-      {/* Desktop Filters */}
-      <div className="d-none d-lg-flex p-1 flex-column">
+    <Offcanvas show={show} onHide={onHide} placement="end">
+      <Offcanvas.Header closeButton>
+        <Offcanvas.Title>Filters</Offcanvas.Title>
+      </Offcanvas.Header>
+      <Offcanvas.Body>
         {isAnyFilterApplied && (
           <Button
             variant="secondary"
-            className="mb-3 text-light"
+            className="mb-3 text-light w-100"
             onClick={resetFilters}
           >
             Reset Filters
           </Button>
         )}
-        {/* Category Filter */}
         <div className="mb-3">
           <h5 className="mb-3">Categories</h5>
           {uniqueCategories.map((category) => (
@@ -145,15 +149,6 @@ function Filter() {
             </div>
           ))}
         </div>
-        <Button
-          variant="secondary"
-          className="mb-3 text-light"
-          onClick={saveFilters}
-        >
-          Save Filters
-        </Button>
-
-        {/* Brand Filter */}
         <div className="mb-3">
           <h5 className="mb-3">Brands</h5>
           {uniqueBrands.map((brand) => (
@@ -175,15 +170,6 @@ function Filter() {
             </div>
           ))}
         </div>
-        <Button
-          variant="secondary"
-          className="mb-3 text-light"
-          onClick={saveFilters}
-        >
-          Save Filters
-        </Button>
-
-        {/* Price Filter */}
         <div className="mb-3">
           <h5 className="mb-3">Price</h5>
           {predefinedPriceRanges.map(({ label, range, count }) => (
@@ -249,14 +235,14 @@ function Filter() {
         </div>
         <Button
           variant="secondary"
-          className="mb-3 text-light"
+          className="mb-3 text-light w-100"
           onClick={saveFilters}
         >
           Save Filters
         </Button>
-      </div>
-    </>
+      </Offcanvas.Body>
+    </Offcanvas>
   );
 }
 
-export default Filter;
+export default MobileFilterMenu;

@@ -10,6 +10,7 @@ import { useProducts } from "./ProductsContext";
 const FiltersContext = createContext();
 
 export const FiltersProvider = ({ children }) => {
+  const [activeItem, setActiveItem] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [categoryFilter, setCategoryFilter] = useState([]);
   const [brandFilter, setBrandFilter] = useState([]);
@@ -104,6 +105,8 @@ export const FiltersProvider = ({ children }) => {
         filteredProducts,
         currentProducts,
         productsPerPage,
+        activeItem,
+        setActiveItem,
       }}
     >
       {children}

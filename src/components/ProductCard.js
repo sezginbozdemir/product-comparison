@@ -1,6 +1,8 @@
 import React from "react";
-import "@fortawesome/fontawesome-free/css/all.min.css"; // Import Font Awesome CSS
+import { useState } from "react";
 import { useFavorites } from "../context/FavoritesContext";
+import { Card, Button, Col, OverlayTrigger, Tooltip } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 function ProductCard({ product }) {
   const { addFavorite, removeFavorite, isFavorite } = useFavorites();
@@ -9,49 +11,75 @@ function ProductCard({ product }) {
     e.preventDefault(); // Prevent the default anchor behavior
     isFavorite(product) ? removeFavorite(product) : addFavorite(product);
   };
+  const [showTooltip, setShowTooltip] = useState(false);
+  const handleMouseEnter = () => {
+    setShowTooltip(true);
+  };
+
+  const handleMouseLeave = () => {
+    console.log(showTooltip);
+    setShowTooltip(false);
+  };
+  const handleTooltipClick = () => {
+    window.location.href = product.url;
+  };
 
   return (
-    <div className="col mb-4">
-      <a href={product.url} className="card-link">
-        <div className="card h-100 product-card">
-          <img
+    <Col className="mb-4">
+      <OverlayTrigger
+        placement="top"
+        offset={[0, -100]}
+        show={showTooltip}
+        overlay={
+          <Tooltip
+            onMouseEnter={handleMouseEnter}
+            onClick={handleTooltipClick}
+            className="tooltip-custom"
+          >
+            Go to Product
+          </Tooltip>
+        }
+      >
+        <Card style={{ textDecoration: "none" }} as={Link} to={product.url}>
+          <Card.Img
+            variant="top"
             src={product["urluri imagine"]}
-            className="card-img-top"
-            alt={product.titlu}
-            style={{
-              borderTopLeftRadius: "15px",
-              borderTopRightRadius: "15px",
-            }}
+            className="object-fit-cover border rounded"
+            style={{ height: "18rem" }}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
           />
-          <div className="card-body text-center">
-            <h5 className="card-title h6 truncate-text">{product.titlu}</h5>
-            <p className="card-text small text-muted truncate-text">
-              {product.brand}
-            </p>
-            <p className="card-text font-weight-bold truncate-text">
+          <Card.Body>
+            <Card.Title
+              style={{ textOverflow: "ellipsis", whiteSpace: "nowrap" }}
+              className="h6 overflow-hidden"
+            >
+              {product.titlu}
+            </Card.Title>
+            <Card.Text className="small text-muted">{product.brand}</Card.Text>
+            <Card.Text className="font-weight-bold truncate-text">
               {product["pret*"]} lei
-            </p>
+            </Card.Text>
             <div className="d-flex justify-content-center">
-              <a
+              <Button
                 href={product.url}
-                className="btn btn-sm btn-primary mr-2 details-button"
+                variant="secondary"
+                style={{ width: "90%" }}
+                className="mr-2"
               >
                 Detalii
-              </a>
-              <button
-                className={`btn btn-sm ${
-                  isFavorite(product) ? "btn-danger" : "btn-outline-primary"
-                } favorite-button`}
+              </Button>
+              <Button
+                variant={isFavorite(product) ? "danger" : "outline-secondary"}
                 onClick={handleFavoriteClick}
               >
-                <i className={`fas fa-heart favorite-icon`}></i>
-              </button>
+                <i className={`bi bi-bag-heart-fill`}></i>
+              </Button>
             </div>
-          </div>
-        </div>
-        <div className="hover-text">Mergi către magazin</div>
-      </a>
-    </div>
+          </Card.Body>
+        </Card>
+      </OverlayTrigger>
+    </Col>
   );
 }
 
