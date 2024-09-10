@@ -60,6 +60,18 @@ function MobileMenu({ show, onHide, handleNavItemClick, setShowOffcanvas }) {
           >
             <i class="bi bi-ticket-perforated"></i> Coupons
           </Nav.Link>
+          <Nav.Link
+            className={"text-dark fs-5 border-bottom"}
+            onClick={(e) => handleNavItemClick("bestsellers", "/", e)}
+          >
+            <i class="bi bi-bookmark-star"></i> Best Sellers
+          </Nav.Link>
+          <Nav.Link
+            className={"text-dark fs-5 border-bottom"}
+            onClick={(e) => handleNavItemClick("new-releases", "/", e)}
+          >
+            <i class="bi bi-bag-check"></i> New Releases
+          </Nav.Link>
           <hr className="mt-5 mb-5" />
           <h5 className="mb-3 ml-3">Categories</h5>
           {uniqueCategories.map((category, index) => (

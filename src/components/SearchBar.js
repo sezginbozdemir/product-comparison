@@ -22,20 +22,25 @@ function SearchBar() {
   return (
     <>
       {isMobile && (
-        <Form className="p-3" onSubmit={handleSearchMobile}>
-          <InputGroup size="lg">
+        <Form className="p-4  bg-light" onSubmit={handleSearchMobile}>
+          <InputGroup>
             <Form.Control
               type="search"
-              placeholder="Search"
+              placeholder="Search products.."
               value={pendingSearchTerm}
               onChange={(e) => setPendingSearchTerm(e.target.value)}
               className="mt-0"
-              style={{ width: "90%" }}
+              style={{ width: "87%", height: "2.7rem", borderColor: "#bfbfbf" }}
             />
             <Button
               variant="outline-secondary"
               type="submit"
-              style={{ width: "10%", borderColor: "#dee2e6" }}
+              style={{
+                width: "13%",
+                borderColor: "#bfbfbf",
+                height: "2.7rem",
+                backgroundColor: "#f2f2f2",
+              }}
             >
               <i className="bi bi-search"></i>
             </Button>

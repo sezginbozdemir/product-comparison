@@ -39,7 +39,7 @@ function ProductList() {
           )}
         </Alert>
       )}
-      <Row className="row row-cols-1 row-cols-sm-2 row-cols-md-3">
+      <Row className="row row-cols-2 row-cols-sm-3 row-cols-md-4">
         {currentProducts.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}

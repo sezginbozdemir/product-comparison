@@ -145,13 +145,6 @@ function Filter() {
             </div>
           ))}
         </div>
-        <Button
-          variant="secondary"
-          className="mb-3 text-light"
-          onClick={saveFilters}
-        >
-          Save Filters
-        </Button>
 
         {/* Brand Filter */}
         <div className="mb-3">
@@ -175,13 +168,6 @@ function Filter() {
             </div>
           ))}
         </div>
-        <Button
-          variant="secondary"
-          className="mb-3 text-light"
-          onClick={saveFilters}
-        >
-          Save Filters
-        </Button>
 
         {/* Price Filter */}
         <div className="mb-3">

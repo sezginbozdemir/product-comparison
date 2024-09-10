@@ -85,7 +85,8 @@ function Navigation() {
     <>
       <Navbar
         expand="lg"
-        className={`bg-light ${isMobile ? "sticky-top" : ""}`}
+        style={{ backgroundColor: "#ffffff" }}
+        className={` ${isMobile ? "sticky-top" : ""}`}
       >
         <Container>
           <Navbar.Brand>
@@ -114,12 +115,21 @@ function Navigation() {
                   value={pendingSearchTerm}
                   onChange={(e) => setPendingSearchTerm(e.target.value)}
                   className="mt-0"
-                  style={{ width: "90%" }}
+                  style={{
+                    width: "87%",
+                    height: "2.7rem",
+                    borderColor: "#bfbfbf",
+                  }}
                 />
                 <Button
                   variant="outline-secondary"
                   type="submit"
-                  style={{ width: "10%", borderColor: "#dee2e6" }}
+                  style={{
+                    width: "13%",
+                    borderColor: "#bfbfbf",
+                    height: "2.7rem",
+                    backgroundColor: "#f2f2f2",
+                  }}
                 >
                   <i className="bi bi-search"></i>
                 </Button>
@@ -193,6 +203,26 @@ function Navigation() {
                 onClick={(e) => handleNavItemClick("coupons", "/", e)}
               >
                 Coupons
+              </Nav.Link>
+              <Nav.Link
+                className={`text-light ${
+                  activeItem === "bestsellers"
+                    ? "border-bottom border-white"
+                    : ""
+                }`}
+                onClick={(e) => handleNavItemClick("bestsellers", "/", e)}
+              >
+                Best Sellers
+              </Nav.Link>
+              <Nav.Link
+                className={`text-light ${
+                  activeItem === "new-releases"
+                    ? "border-bottom border-white"
+                    : ""
+                }`}
+                onClick={(e) => handleNavItemClick("new-releases", "/", e)}
+              >
+                New Releases
               </Nav.Link>
             </Nav>
           </Container>

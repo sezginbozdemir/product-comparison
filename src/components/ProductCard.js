@@ -45,7 +45,7 @@ function ProductCard({ product }) {
             variant="top"
             src={product["urluri imagine"]}
             className="object-fit-cover border rounded"
-            style={{ height: "18rem" }}
+            style={{ height: "11rem" }}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
           />
