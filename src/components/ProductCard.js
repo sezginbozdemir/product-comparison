@@ -1,7 +1,14 @@
 import React from "react";
 import { useState } from "react";
 import { useFavorites } from "../context/FavoritesContext";
-import { Card, Button, Col, OverlayTrigger, Tooltip } from "react-bootstrap";
+import {
+  Card,
+  Button,
+  Col,
+  OverlayTrigger,
+  Tooltip,
+  Badge,
+} from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 function ProductCard({ product }) {
@@ -23,6 +30,17 @@ function ProductCard({ product }) {
   const handleTooltipClick = () => {
     window.location.href = product.productUrl;
   };
+  const calculateDiscount = () => {
+    if (product.newPrice) {
+      const discount =
+        ((product.productPrice - product.newPrice) / product.productPrice) *
+        100;
+      return Math.round(discount);
+    }
+    return null;
+  };
+
+  const discountPercentage = calculateDiscount();
 
   return (
     <Col className="mb-4">
@@ -53,6 +71,19 @@ function ProductCard({ product }) {
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
           />
+          {discountPercentage && (
+            <Badge
+              bg="danger"
+              style={{
+                position: "absolute",
+                top: "10px",
+                right: "10px",
+                fontSize: "1rem",
+              }}
+            >
+              -{discountPercentage}%
+            </Badge>
+          )}
           <Card.Body>
             <Card.Text className="small text-muted">{product.seller}</Card.Text>
             <Card.Title

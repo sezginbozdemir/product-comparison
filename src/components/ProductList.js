@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import ProductCard from "./ProductCard";
+import Filter from "./Filter";
 import CompactPagination from "./CompactPagination";
 import MobileFilterMenu from "./MobileFilters";
 import { useFilters } from "../context/FiltersContext";
 import { useIsMobile } from "../context/IsMobileContext";
 import { useProducts } from "../context/ProductsContext";
-import { Row, Alert, Button, Dropdown } from "react-bootstrap";
+import { Row, Alert, Button, Dropdown, Col } from "react-bootstrap";
 
 function ProductList() {
   const { products, setProducts } = useProducts();
@@ -45,29 +46,6 @@ function ProductList() {
 
   return (
     <>
-      <div className="d-flex justify-content-between">
-        {isMobile && (
-          <Button variant="" className="mb-3" onClick={handleShowFilter}>
-            Filters <i className="bi bi-funnel"></i>
-          </Button>
-        )}
-        <Dropdown className="mb-3">
-          <Dropdown.Toggle variant="">
-            <i class="bi bi-filter-right"></i> Sort by
-          </Dropdown.Toggle>
-          <Dropdown.Menu>
-            <Dropdown.Item value="priceLowToHigh" onClick={handleSort}>
-              <i class="bi bi-sort-numeric-up-alt"></i> Price: Low to High
-            </Dropdown.Item>
-            <Dropdown.Item value="priceHighToLow" onClick={handleSort}>
-              <i class="bi bi-sort-numeric-down-alt"></i> Price: High to Low
-            </Dropdown.Item>
-            <Dropdown.Item value="random" onClick={handleSort}>
-              <i class="bi bi-shuffle"></i> Random
-            </Dropdown.Item>
-          </Dropdown.Menu>
-        </Dropdown>
-      </div>
       {searchPerformed && (
         <Alert
           className=""
@@ -85,15 +63,49 @@ function ProductList() {
           )}
         </Alert>
       )}
-      <Row className="row row-cols-2 row-cols-sm-3 row-cols-md-4">
-        {currentProducts.map((product) => (
-          <ProductCard key={product.productCode} product={product} />
-        ))}
+      <Row>
+        <Col xs={0} md={4}>
+          <Filter />
+        </Col>
+
+        <Col xs={12} md={8}>
+          <Row>
+            <div className="d-flex justify-content-between">
+              {isMobile && (
+                <Button variant="" className="mb-3" onClick={handleShowFilter}>
+                  Filters <i className="bi bi-funnel"></i>
+                </Button>
+              )}
+              <Dropdown className="mb-3">
+                <Dropdown.Toggle variant="">
+                  <i class="bi bi-filter-right"></i> Sort by
+                </Dropdown.Toggle>
+                <Dropdown.Menu>
+                  <Dropdown.Item value="priceLowToHigh" onClick={handleSort}>
+                    <i class="bi bi-sort-numeric-up-alt"></i> Price: Low to High
+                  </Dropdown.Item>
+                  <Dropdown.Item value="priceHighToLow" onClick={handleSort}>
+                    <i class="bi bi-sort-numeric-down-alt"></i> Price: High to
+                    Low
+                  </Dropdown.Item>
+                  <Dropdown.Item value="random" onClick={handleSort}>
+                    <i class="bi bi-shuffle"></i> Random
+                  </Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+            </div>
+          </Row>
+          <Row className="row-cols-2 row-cols-sm-3 row-cols-md-4">
+            {currentProducts.map((product) => (
+              <ProductCard key={product.productCode} product={product} />
+            ))}
+          </Row>
+          <Row>
+            <CompactPagination />
+          </Row>
+        </Col>
       </Row>
 
-      <CompactPagination />
-
-      {/* Mobile Filter Menu */}
       <MobileFilterMenu show={showFilter} onHide={handleCloseFilter} />
     </>
   );

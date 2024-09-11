@@ -67,21 +67,21 @@ function MobileMenu({ show, onHide, handleNavItemClick, setShowOffcanvas }) {
           </Nav.Link>
           <Nav.Link
             className={"text-dark fs-5 border-bottom"}
-            onClick={(e) => handleNavItemClick("promotions", "/", e)}
+            onClick={(e) => handleNavItemClick("deals", "/deals", e)}
           >
             <i class="bi bi-percent"></i> Deals
           </Nav.Link>
           <Nav.Link
             className={"text-dark fs-5 border-bottom"}
-            onClick={(e) => handleNavItemClick("bestsellers", "/", e)}
+            onClick={(e) => handleNavItemClick("sellers", "/sellers", e)}
           >
-            <i class="bi bi-bookmark-star"></i> Best Sellers
+            <i class="bi bi-bookmark-star"></i> Sellers
           </Nav.Link>
           <Nav.Link
             className={"text-dark fs-5 border-bottom"}
-            onClick={(e) => handleNavItemClick("new-releases", "/", e)}
+            onClick={(e) => handleNavItemClick("vouchers", "/vouchers", e)}
           >
-            <i class="bi bi-bag-check"></i> New Releases
+            <i class="bi bi-ticket-perforated"></i> Vouchers
           </Nav.Link>
           <hr className="mt-5 mb-5" />
           <Accordion className="mb-3" defaultActiveKey="0" flush>

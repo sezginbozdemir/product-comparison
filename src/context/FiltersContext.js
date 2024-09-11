@@ -6,6 +6,7 @@ import React, {
   useMemo,
 } from "react";
 import { useProducts } from "./ProductsContext";
+import { useLocation } from "react-router-dom";
 
 const FiltersContext = createContext();
 
@@ -21,6 +22,7 @@ export const FiltersProvider = ({ children }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchPerformed, setSearchPerformed] = useState(false);
   const productsPerPage = 16;
+  const location = useLocation();
   const { products } = useProducts();
 
   useEffect(() => {
@@ -28,7 +30,7 @@ export const FiltersProvider = ({ children }) => {
   }, [searchTerm]);
 
   const filteredProducts = useMemo(() => {
-    return products.filter((product) => {
+    let filtered = products.filter((product) => {
       const titleMatch = product.productName
         ? product.productName.toLowerCase().includes(searchTerm.toLowerCase())
         : true;
@@ -64,6 +66,7 @@ export const FiltersProvider = ({ children }) => {
               );
             })()
           : true;
+
       return (
         titleMatch &&
         categoryMatch &&
@@ -73,6 +76,12 @@ export const FiltersProvider = ({ children }) => {
         customPriceMatch
       );
     });
+
+    if (location.pathname === "/deals") {
+      filtered = filtered.filter((product) => product.newPrice);
+    }
+
+    return filtered;
   }, [
     products,
     searchTerm,
@@ -81,6 +90,7 @@ export const FiltersProvider = ({ children }) => {
     sellerFilter,
     priceFilter,
     customPriceRange,
+    location, // Include location in dependencies
   ]);
   const availableBrands = useMemo(() => {
     const brands = new Set();

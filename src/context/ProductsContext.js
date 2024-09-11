@@ -8,7 +8,6 @@ export const ProductsProvider = ({ children }) => {
 
   useEffect(() => {
     async function loadProducts() {
-      // Define the local file paths
       const urls = [
         "/files/bricolaj.csv",
         "/files/hiris.csv",
@@ -21,7 +20,6 @@ export const ProductsProvider = ({ children }) => {
       ];
 
       try {
-        // Fetch data from all local CSV files
         const allData = await Promise.all(
           urls.map(async (url) => {
             const data = await fetchCsvData(url);
@@ -29,10 +27,8 @@ export const ProductsProvider = ({ children }) => {
           })
         );
 
-        // Combine all the data into one array
         const combinedData = allData.flat();
 
-        // Set the products state
         setProducts(combinedData);
       } catch (error) {
         console.error("Error fetching CSV files", error);
@@ -42,7 +38,6 @@ export const ProductsProvider = ({ children }) => {
     loadProducts();
   }, []);
 
-  // Extract unique categories and brands
   const uniqueCategories = [
     ...new Set(products.map((product) => product.category).filter(Boolean)),
   ];
@@ -53,7 +48,12 @@ export const ProductsProvider = ({ children }) => {
 
   return (
     <ProductsContext.Provider
-      value={{ products, setProducts, uniqueCategories, uniqueBrands }}
+      value={{
+        products,
+        setProducts,
+        uniqueCategories,
+        uniqueBrands,
+      }}
     >
       {children}
     </ProductsContext.Provider>

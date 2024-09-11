@@ -189,33 +189,27 @@ function Navigation() {
               </Nav.Link>
               <Nav.Link
                 className={`text-light mr-2 ${
-                  activeItem === "promotions"
-                    ? "border-bottom border-white"
-                    : ""
+                  activeItem === "deals" ? "border-bottom border-white" : ""
                 }`}
-                onClick={(e) => handleNavItemClick("promotions", "/", e)}
+                onClick={(e) => handleNavItemClick("deals", "/deals", e)}
               >
                 Deals
               </Nav.Link>
               <Nav.Link
                 className={`text-light mr-2 ${
-                  activeItem === "bestsellers"
-                    ? "border-bottom border-white"
-                    : ""
+                  activeItem === "sellers" ? "border-bottom border-white" : ""
                 }`}
-                onClick={(e) => handleNavItemClick("bestsellers", "/", e)}
+                onClick={(e) => handleNavItemClick("sellers", "/sellers", e)}
               >
-                Best Sellers
+                Sellers
               </Nav.Link>
               <Nav.Link
                 className={`text-light mr-2 ${
-                  activeItem === "new-releases"
-                    ? "border-bottom border-white"
-                    : ""
+                  activeItem === "vouchers" ? "border-bottom border-white" : ""
                 }`}
-                onClick={(e) => handleNavItemClick("new-releases", "/", e)}
+                onClick={(e) => handleNavItemClick("vouchers", "/vouchers", e)}
               >
-                New Releases
+                Vouchers
               </Nav.Link>
             </Nav>
           </Container>
