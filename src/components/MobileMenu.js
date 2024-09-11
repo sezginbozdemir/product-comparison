@@ -12,6 +12,7 @@ function MobileMenu({ show, onHide, handleNavItemClick, setShowOffcanvas }) {
     setPriceFilter,
     setCustomPriceRange,
     setActiveItem,
+    availableCategories,
   } = useFilters();
   const { uniqueCategories } = useProducts();
   const navigate = useNavigate();
@@ -30,8 +31,18 @@ function MobileMenu({ show, onHide, handleNavItemClick, setShowOffcanvas }) {
     navigate("/products");
     setShowOffcanvas(false);
   };
+  const splittedCategories = [
+    ...new Set(
+      uniqueCategories.map((category) => category.split(/\/|#|<|>/)[0])
+    ),
+  ];
   return (
-    <Offcanvas show={show} onHide={onHide} placement="start">
+    <Offcanvas
+      className="custom-offcanvas"
+      show={show}
+      onHide={onHide}
+      placement="start"
+    >
       <Offcanvas.Header closeButton></Offcanvas.Header>
       <Offcanvas.Body>
         <Nav className="flex-column">
@@ -52,13 +63,7 @@ function MobileMenu({ show, onHide, handleNavItemClick, setShowOffcanvas }) {
             className={"text-dark fs-5 border-bottom"}
             onClick={(e) => handleNavItemClick("promotions", "/", e)}
           >
-            <i class="bi bi-percent"></i> Promotions
-          </Nav.Link>
-          <Nav.Link
-            className={"text-dark fs-5 border-bottom"}
-            onClick={(e) => handleNavItemClick("coupons", "/", e)}
-          >
-            <i class="bi bi-ticket-perforated"></i> Coupons
+            <i class="bi bi-percent"></i> Deals
           </Nav.Link>
           <Nav.Link
             className={"text-dark fs-5 border-bottom"}
@@ -74,7 +79,7 @@ function MobileMenu({ show, onHide, handleNavItemClick, setShowOffcanvas }) {
           </Nav.Link>
           <hr className="mt-5 mb-5" />
           <h5 className="mb-3 ml-3">Categories</h5>
-          {uniqueCategories.map((category, index) => (
+          {splittedCategories.map((category, index) => (
             <Nav.Link
               key={index}
               onClick={() => handleCategoryChange(category)}

@@ -11,7 +11,7 @@ function Favorites() {
       {favorites.length > 0 ? (
         <div className="row row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
           {favorites.map((product) => (
-            <ProductCard key={product["id produs"]} product={product} />
+            <ProductCard key={product.productCode} product={product} />
           ))}
         </div>
       ) : (

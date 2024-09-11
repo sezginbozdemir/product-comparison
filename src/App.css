@@ -1,7 +1,15 @@
+body {
+  font-family: "Noto Sans", sans-serif;
+  font-weight: 500;
+}
+
+.custom-offcanvas {
+  width: 20rem !important;
+}
 .custom-dropdown .dropdown-menu {
-  width: 100vh; /* Full width of the parent container */
-  margin-top: 0.5rem; /* Remove default margin */
-  border-radius: 0; /* Optional: remove border radius for flush edges */
+  width: 100vh;
+  margin-top: 0.5rem;
+  border-radius: 0;
   border-top: 0;
 }
 .tooltip-custom .tooltip-inner {

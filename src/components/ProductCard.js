@@ -7,8 +7,8 @@ import { Link } from "react-router-dom";
 function ProductCard({ product }) {
   const { addFavorite, removeFavorite, isFavorite } = useFavorites();
   const handleFavoriteClick = (e) => {
-    e.stopPropagation(); // Prevent click event from triggering the card link
-    e.preventDefault(); // Prevent the default anchor behavior
+    e.stopPropagation();
+    e.preventDefault();
     isFavorite(product) ? removeFavorite(product) : addFavorite(product);
   };
   const [showTooltip, setShowTooltip] = useState(false);
@@ -21,7 +21,7 @@ function ProductCard({ product }) {
     setShowTooltip(false);
   };
   const handleTooltipClick = () => {
-    window.location.href = product.url;
+    window.location.href = product.productUrl;
   };
 
   return (
@@ -40,11 +40,15 @@ function ProductCard({ product }) {
           </Tooltip>
         }
       >
-        <Card style={{ textDecoration: "none" }} as={Link} to={product.url}>
+        <Card
+          style={{ textDecoration: "none" }}
+          as={Link}
+          to={product.productUrl}
+        >
           <Card.Img
             variant="top"
-            src={product["urluri imagine"]}
-            className="object-fit-cover border rounded"
+            src={product.productImg}
+            className="object-fit-cover"
             style={{ height: "11rem" }}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
@@ -54,26 +58,33 @@ function ProductCard({ product }) {
               style={{ textOverflow: "ellipsis", whiteSpace: "nowrap" }}
               className="h6 overflow-hidden"
             >
-              {product.titlu}
+              {product.productName}
             </Card.Title>
             <Card.Text className="small text-muted">{product.brand}</Card.Text>
             <Card.Text className="font-weight-bold truncate-text">
-              {product["pret*"]} lei
+              {product.productPrice} lei
             </Card.Text>
             <div className="d-flex justify-content-center">
               <Button
-                href={product.url}
-                variant="secondary"
-                style={{ width: "90%" }}
+                href={product.productUrl}
+                variant=""
+                style={{
+                  width: "90%",
+                  backgroundColor: "#e6e6e6",
+                }}
                 className="mr-2"
               >
-                Detalii
+                Details
               </Button>
               <Button
-                variant={isFavorite(product) ? "danger" : "outline-secondary"}
+                variant={isFavorite(product) ? "danger" : "secondary"}
+                style={{
+                  backgroundColor: !isFavorite(product) ? "#e6e6e6" : "",
+                  border: !isFavorite(product) ? "0" : "",
+                }}
                 onClick={handleFavoriteClick}
               >
-                <i className={`bi bi-bag-heart-fill`}></i>
+                <i className={`bi bi-heart-fill`}></i>
               </Button>
             </div>
           </Card.Body>

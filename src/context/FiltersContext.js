@@ -14,11 +14,12 @@ export const FiltersProvider = ({ children }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [categoryFilter, setCategoryFilter] = useState([]);
   const [brandFilter, setBrandFilter] = useState([]);
+  const [sellerFilter, setSellerFilter] = useState([]);
   const [priceFilter, setPriceFilter] = useState([]);
   const [customPriceRange, setCustomPriceRange] = useState([0, 2000]);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchPerformed, setSearchPerformed] = useState(false);
-  const productsPerPage = 12;
+  const productsPerPage = 16;
   const { products } = useProducts();
 
   useEffect(() => {
@@ -27,26 +28,36 @@ export const FiltersProvider = ({ children }) => {
 
   const filteredProducts = useMemo(() => {
     return products.filter((product) => {
-      const titleMatch = product.titlu
-        ? product.titlu.toLowerCase().includes(searchTerm.toLowerCase())
+      const titleMatch = product.productName
+        ? product.productName.toLowerCase().includes(searchTerm.toLowerCase())
         : true;
       const categoryMatch = categoryFilter.length
-        ? categoryFilter.includes(product.categorie)
+        ? categoryFilter.some(
+            (filterCategory) =>
+              filterCategory &&
+              product.category &&
+              product.category
+                .toLowerCase()
+                .includes(filterCategory.toLowerCase())
+          )
         : true;
       const brandMatch = brandFilter.length
         ? brandFilter.includes(product.brand)
         : true;
+      const sellerMatch = sellerFilter.length
+        ? sellerFilter.includes(product.seller)
+        : true;
       const priceMatch = priceFilter.length
         ? priceFilter.some((range) => {
             const [min, max] = range.split("-").map(Number);
-            const price = parseFloat(product["pret*"]);
+            const price = parseFloat(product.productPrice);
             return price >= min && price <= max;
           })
         : true;
       const customPriceMatch =
         customPriceRange.length === 2
           ? (() => {
-              const price = parseFloat(product["pret*"]);
+              const price = parseFloat(product.productPrice);
               return (
                 price >= customPriceRange[0] && price <= customPriceRange[1]
               );
@@ -56,6 +67,7 @@ export const FiltersProvider = ({ children }) => {
         titleMatch &&
         categoryMatch &&
         brandMatch &&
+        sellerMatch &&
         priceMatch &&
         customPriceMatch
       );
@@ -65,9 +77,38 @@ export const FiltersProvider = ({ children }) => {
     searchTerm,
     categoryFilter,
     brandFilter,
+    sellerFilter,
     priceFilter,
     customPriceRange,
   ]);
+  const availableBrands = useMemo(() => {
+    const brands = new Set();
+
+    filteredProducts.forEach((product) => {
+      brands.add(product.brand);
+    });
+
+    return Array.from(brands);
+  }, [filteredProducts]);
+  const availableSellers = useMemo(() => {
+    const sellers = new Set();
+
+    filteredProducts.forEach((product) => {
+      sellers.add(product.seller);
+    });
+
+    return Array.from(sellers);
+  }, [filteredProducts]);
+
+  const availableCategories = useMemo(() => {
+    const categories = new Set();
+
+    filteredProducts.forEach((product) => {
+      categories.add(product.category);
+    });
+
+    return Array.from(categories);
+  }, [filteredProducts]);
 
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
@@ -95,6 +136,8 @@ export const FiltersProvider = ({ children }) => {
         setCategoryFilter,
         brandFilter,
         setBrandFilter,
+        sellerFilter,
+        setSellerFilter,
         priceFilter,
         setPriceFilter,
         customPriceRange,
@@ -107,6 +150,9 @@ export const FiltersProvider = ({ children }) => {
         productsPerPage,
         activeItem,
         setActiveItem,
+        availableBrands,
+        availableCategories,
+        availableSellers,
       }}
     >
       {children}

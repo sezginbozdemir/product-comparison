@@ -5,22 +5,45 @@ const ProductsContext = createContext();
 
 export const ProductsProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
+
   useEffect(() => {
     async function loadProducts() {
+      // Define the local file paths
+      const urls = [
+        "/files/bricolaj.csv",
+        "/files/hiris.csv",
+        "/files/it-galaxy.csv",
+        "/files/mindblower.csv",
+        "/files/nichiduta.csv",
+        "/files/perfect-bijoux.csv",
+        "/files/sevensins.csv",
+      ];
+
       try {
-        const targetUrl =
-          "https://emrengros.ro/getfile.php?filename=2performant-api.csv";
-        const data = await fetchCsvData(targetUrl);
-        setProducts(data);
+        // Fetch data from all local CSV files
+        const allData = await Promise.all(
+          urls.map(async (url) => {
+            const data = await fetchCsvData(url);
+            return data;
+          })
+        );
+
+        // Combine all the data into one array
+        const combinedData = allData.flat();
+
+        // Set the products state
+        setProducts(combinedData);
       } catch (error) {
-        console.error("Error fetching CSV file", error);
+        console.error("Error fetching CSV files", error);
       }
     }
+
     loadProducts();
   }, []);
 
+  // Extract unique categories and brands
   const uniqueCategories = [
-    ...new Set(products.map((product) => product.categorie).filter(Boolean)),
+    ...new Set(products.map((product) => product.category).filter(Boolean)),
   ];
 
   const uniqueBrands = [
@@ -35,4 +58,5 @@ export const ProductsProvider = ({ children }) => {
     </ProductsContext.Provider>
   );
 };
+
 export const useProducts = () => useContext(ProductsContext);

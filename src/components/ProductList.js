@@ -17,8 +17,8 @@ function ProductList() {
   return (
     <>
       {isMobile && (
-        <Button variant="secondary" className="mb-3" onClick={handleShowFilter}>
-          <i className="bi bi-funnel"></i> Filters
+        <Button variant="" className="mb-3" onClick={handleShowFilter}>
+          Filters <i className="bi bi-funnel"></i>
         </Button>
       )}
 
@@ -41,7 +41,7 @@ function ProductList() {
       )}
       <Row className="row row-cols-2 row-cols-sm-3 row-cols-md-4">
         {currentProducts.map((product) => (
-          <ProductCard key={product.id} product={product} />
+          <ProductCard key={product.productCode} product={product} />
         ))}
       </Row>
 

@@ -86,7 +86,7 @@ function Navigation() {
       <Navbar
         expand="lg"
         style={{ backgroundColor: "#ffffff" }}
-        className={` ${isMobile ? "sticky-top" : ""}`}
+        className={` border-bottom ${isMobile ? "sticky-top" : ""}`}
       >
         <Container>
           <Navbar.Brand>
@@ -138,12 +138,13 @@ function Navigation() {
           )}
           <Nav>
             <Nav.Link
-              className={`mr-3 ${
+              className={`mr-4 ${
                 activeItem === "favorites" ? "text-danger" : "text-secondary"
-              }`}
+              } ${isMobile ? "fs-4" : ""}`}
               onClick={(e) => handleNavItemClick("favorites", "/favorites", e)}
             >
-              <i className="fas fa-heart"></i> Favorites ({favoritesCount})
+              {!isMobile && "Favorites "}
+              <i className={"fas fa-heart"}></i> {favoritesCount}
             </Nav.Link>
           </Nav>
         </Container>
@@ -157,7 +158,7 @@ function Navigation() {
           <Container>
             <Nav>
               <NavDropdown
-                className="custom-dropdown"
+                className="custom-dropdown mr-3"
                 title="Categories"
                 id="basic-nav-dropdown"
               >
@@ -171,7 +172,7 @@ function Navigation() {
                 ))}
               </NavDropdown>
               <Nav.Link
-                className={`text-light ${
+                className={`text-light mr-2 ${
                   activeItem === "home" ? "border-bottom border-white" : ""
                 }`}
                 onClick={(e) => handleNavItemClick("home", "/", e)}
@@ -179,7 +180,7 @@ function Navigation() {
                 Home
               </Nav.Link>
               <Nav.Link
-                className={`text-light ${
+                className={`text-light mr-2 ${
                   activeItem === "products" ? "border-bottom border-white" : ""
                 }`}
                 onClick={(e) => handleNavItemClick("products", "/products", e)}
@@ -187,25 +188,17 @@ function Navigation() {
                 Products
               </Nav.Link>
               <Nav.Link
-                className={`text-light ${
+                className={`text-light mr-2 ${
                   activeItem === "promotions"
                     ? "border-bottom border-white"
                     : ""
                 }`}
                 onClick={(e) => handleNavItemClick("promotions", "/", e)}
               >
-                Promotions
+                Deals
               </Nav.Link>
               <Nav.Link
-                className={`text-light ${
-                  activeItem === "coupons" ? "border-bottom border-white" : ""
-                }`}
-                onClick={(e) => handleNavItemClick("coupons", "/", e)}
-              >
-                Coupons
-              </Nav.Link>
-              <Nav.Link
-                className={`text-light ${
+                className={`text-light mr-2 ${
                   activeItem === "bestsellers"
                     ? "border-bottom border-white"
                     : ""
@@ -215,7 +208,7 @@ function Navigation() {
                 Best Sellers
               </Nav.Link>
               <Nav.Link
-                className={`text-light ${
+                className={`text-light mr-2 ${
                   activeItem === "new-releases"
                     ? "border-bottom border-white"
                     : ""

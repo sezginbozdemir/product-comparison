@@ -18,12 +18,12 @@ export const FavoritesProvider = ({ children }) => {
 
   const removeFavorite = (product) => {
     setFavorites((prevFavorites) =>
-      prevFavorites.filter((fav) => fav["id produs"] !== product["id produs"])
+      prevFavorites.filter((fav) => fav.productCode !== product.productCode)
     );
   };
 
   const isFavorite = (product) => {
-    return favorites.some((fav) => fav["id produs"] === product["id produs"]);
+    return favorites.some((fav) => fav.productCode === product.productCode);
   };
 
   return (
