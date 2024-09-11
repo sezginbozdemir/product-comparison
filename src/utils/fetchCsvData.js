@@ -14,10 +14,10 @@ export async function fetchCsvData(url) {
           seller: product["Advertiser name"],
           productCode: product["Product code"],
           productName: product["Product name"]?.trim(),
-          productUrl: product["Product affiliate"],
+          productUrl: "https:" + product["Product affiliate link"],
           productImg: product["Product picture"],
           productPrice: product["Price with VAT"],
-          newPrice: product["Price with discount"],
+          newPrice: product["Price with discount, with VAT"],
         }));
         resolve(normalizedData);
       },

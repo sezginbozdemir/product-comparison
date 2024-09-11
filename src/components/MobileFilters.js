@@ -178,7 +178,12 @@ function MobileFilterMenu({ show, onHide }) {
           <AccordionHeader className="mb-3 border-bottom">
             Categories
           </AccordionHeader>
-          <AccordionBody>
+          <AccordionBody
+            style={{
+              maxHeight: "30rem",
+              overflow: "scroll",
+            }}
+          >
             <Form.Control
               type="text"
               className="mb-3"
@@ -210,7 +215,12 @@ function MobileFilterMenu({ show, onHide }) {
           <AccordionHeader className="mb-3 border-bottom">
             Brands
           </AccordionHeader>
-          <AccordionBody>
+          <AccordionBody
+            style={{
+              maxHeight: "30rem",
+              overflow: "scroll",
+            }}
+          >
             <Form.Control
               type="text"
               className="mb-3"
@@ -242,7 +252,12 @@ function MobileFilterMenu({ show, onHide }) {
           <AccordionHeader className="mb-3 border-bottom">
             Sellers
           </AccordionHeader>
-          <AccordionBody>
+          <AccordionBody
+            style={{
+              maxHeight: "30rem",
+              overflow: "scroll",
+            }}
+          >
             {availableSellers.map((seller) => (
               <div
                 className={`p-2 ${
@@ -282,7 +297,7 @@ function MobileFilterMenu({ show, onHide }) {
             <Form.Check
               className="mb-3"
               type="checkbox"
-              label={"Price interval"}
+              label={"Price Range"}
               checked={tempCustomPriceRange && tempCustomPriceRange.length > 0}
               onChange={() =>
                 setTempCustomPriceRange(

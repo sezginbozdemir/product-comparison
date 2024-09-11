@@ -1,7 +1,13 @@
 // MobileMenu.js
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { Offcanvas, Nav } from "react-bootstrap";
+import {
+  Offcanvas,
+  Nav,
+  Accordion,
+  AccordionBody,
+  AccordionHeader,
+} from "react-bootstrap";
 import { useProducts } from "../context/ProductsContext";
 import { useFilters } from "../context/FiltersContext";
 
@@ -78,16 +84,29 @@ function MobileMenu({ show, onHide, handleNavItemClick, setShowOffcanvas }) {
             <i class="bi bi-bag-check"></i> New Releases
           </Nav.Link>
           <hr className="mt-5 mb-5" />
-          <h5 className="mb-3 ml-3">Categories</h5>
-          {splittedCategories.map((category, index) => (
-            <Nav.Link
-              key={index}
-              onClick={() => handleCategoryChange(category)}
-              className="text-secondary d-flex justify-content-between"
-            >
-              {category} <i class="bi bi-chevron-right"></i>
-            </Nav.Link>
-          ))}
+          <Accordion className="mb-3" defaultActiveKey="0" flush>
+            <Accordion.Item eventKey="0">
+              <AccordionHeader className="mb-3 border-bottom">
+                Categories
+              </AccordionHeader>
+              <AccordionBody
+                style={{
+                  maxHeight: "30rem",
+                  overflow: "scroll",
+                }}
+              >
+                {splittedCategories.map((category, index) => (
+                  <Nav.Link
+                    key={index}
+                    onClick={() => handleCategoryChange(category)}
+                    className="text-secondary d-flex justify-content-between"
+                  >
+                    {category} <i class="bi bi-chevron-right"></i>
+                  </Nav.Link>
+                ))}
+              </AccordionBody>
+            </Accordion.Item>
+          </Accordion>
         </Nav>
       </Offcanvas.Body>
     </Offcanvas>

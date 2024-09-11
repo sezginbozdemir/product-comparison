@@ -10,7 +10,10 @@ export const IsMobileProvider = ({ children }) => {
       setIsMobile(window.innerWidth < 992);
     };
 
+    handleResize();
+
     window.addEventListener("resize", handleResize);
+
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 

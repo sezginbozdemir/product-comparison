@@ -13,6 +13,7 @@ export const FiltersProvider = ({ children }) => {
   const [activeItem, setActiveItem] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [categoryFilter, setCategoryFilter] = useState([]);
+  const [currentProducts, setCurrentProducts] = useState([]);
   const [brandFilter, setBrandFilter] = useState([]);
   const [sellerFilter, setSellerFilter] = useState([]);
   const [priceFilter, setPriceFilter] = useState([]);
@@ -110,12 +111,13 @@ export const FiltersProvider = ({ children }) => {
     return Array.from(categories);
   }, [filteredProducts]);
 
-  const indexOfLastProduct = currentPage * productsPerPage;
-  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-  const currentProducts = filteredProducts.slice(
-    indexOfFirstProduct,
-    indexOfLastProduct
-  );
+  useEffect(() => {
+    const indexOfLastProduct = currentPage * productsPerPage;
+    const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+    setCurrentProducts(
+      filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct)
+    );
+  }, [filteredProducts, currentPage, productsPerPage]);
 
   const handleSetCategoryFilter = (newFilter) => {
     Array.isArray(newFilter)
@@ -147,6 +149,7 @@ export const FiltersProvider = ({ children }) => {
         handleSetCategoryFilter,
         filteredProducts,
         currentProducts,
+        setCurrentProducts,
         productsPerPage,
         activeItem,
         setActiveItem,

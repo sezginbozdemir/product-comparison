@@ -17,6 +17,7 @@ export const ProductsProvider = ({ children }) => {
         "/files/nichiduta.csv",
         "/files/perfect-bijoux.csv",
         "/files/sevensins.csv",
+        "/files/feed-mixed.csv",
       ];
 
       try {
@@ -52,7 +53,7 @@ export const ProductsProvider = ({ children }) => {
 
   return (
     <ProductsContext.Provider
-      value={{ products, uniqueCategories, uniqueBrands }}
+      value={{ products, setProducts, uniqueCategories, uniqueBrands }}
     >
       {children}
     </ProductsContext.Provider>

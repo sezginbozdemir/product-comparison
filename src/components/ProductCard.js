@@ -54,6 +54,7 @@ function ProductCard({ product }) {
             onMouseLeave={handleMouseLeave}
           />
           <Card.Body>
+            <Card.Text className="small text-muted">{product.seller}</Card.Text>
             <Card.Title
               style={{ textOverflow: "ellipsis", whiteSpace: "nowrap" }}
               className="h6 overflow-hidden"
@@ -61,8 +62,22 @@ function ProductCard({ product }) {
               {product.productName}
             </Card.Title>
             <Card.Text className="small text-muted">{product.brand}</Card.Text>
-            <Card.Text className="font-weight-bold truncate-text">
-              {product.productPrice} lei
+            <Card.Text className="font-weight-bold">
+              {product.newPrice ? (
+                <>
+                  <span className="text-danger font-weight-bold">
+                    {product.newPrice} lei
+                  </span>
+                  <span
+                    className="text-muted ml-2"
+                    style={{ textDecoration: "line-through" }}
+                  >
+                    {product.productPrice} lei
+                  </span>
+                </>
+              ) : (
+                <span>{product.productPrice} lei</span>
+              )}
             </Card.Text>
             <div className="d-flex justify-content-center">
               <Button
