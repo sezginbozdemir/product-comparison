@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useFavorites } from "../context/FavoritesContext";
-import { useProducts } from "../context/ProductsContext";
 import { useFilters } from "../context/FiltersContext";
 import { useIsMobile } from "../context/IsMobileContext";
 import {
   Nav,
-  NavDropdown,
   Button,
   Container,
   Form,
@@ -29,7 +27,6 @@ function Navigation() {
     activeItem,
     setActiveItem,
   } = useFilters();
-  const { uniqueCategories } = useProducts();
   const { favorites } = useFavorites();
   const navigate = useNavigate();
   const [pendingSearchTerm, setPendingSearchTerm] = useState(searchTerm);
@@ -157,20 +154,6 @@ function Navigation() {
         >
           <Container>
             <Nav>
-              <NavDropdown
-                className="custom-dropdown mr-3"
-                title="Categories"
-                id="basic-nav-dropdown"
-              >
-                {uniqueCategories.map((category, index) => (
-                  <NavDropdown.Item
-                    key={index}
-                    onClick={() => handleCategoryChange(category)}
-                  >
-                    {category}
-                  </NavDropdown.Item>
-                ))}
-              </NavDropdown>
               <Nav.Link
                 className={`text-light mr-2 ${
                   activeItem === "home" ? "border-bottom border-white" : ""

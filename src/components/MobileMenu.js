@@ -18,7 +18,6 @@ function MobileMenu({ show, onHide, handleNavItemClick, setShowOffcanvas }) {
     setPriceFilter,
     setCustomPriceRange,
     setActiveItem,
-    availableCategories,
   } = useFilters();
   const { uniqueCategories } = useProducts();
   const navigate = useNavigate();

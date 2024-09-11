@@ -12,6 +12,7 @@ import Deals from "./pages/Deals";
 import Sellers from "./pages/Sellers";
 import Vouchers from "./pages/Vouchers";
 import SearchBar from "./components/SearchBar";
+import Footer from "./components/Footer";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "./App.css";
@@ -35,6 +36,7 @@ function App() {
                     <Route path="/favorites" element={<Favorites />} />
                   </Routes>
                 </div>
+                <Footer />
               </div>
             </FavoritesProvider>
           </FiltersProvider>

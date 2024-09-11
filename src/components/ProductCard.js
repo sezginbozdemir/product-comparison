@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { useFavorites } from "../context/FavoritesContext";
+import { useIsMobile } from "../context/IsMobileContext";
 import {
   Card,
   Button,
@@ -13,6 +14,7 @@ import { Link } from "react-router-dom";
 
 function ProductCard({ product }) {
   const { addFavorite, removeFavorite, isFavorite } = useFavorites();
+  const isMobile = useIsMobile();
   const handleFavoriteClick = (e) => {
     e.stopPropagation();
     e.preventDefault();
@@ -93,7 +95,10 @@ function ProductCard({ product }) {
               {product.productName}
             </Card.Title>
             <Card.Text className="small text-muted">{product.brand}</Card.Text>
-            <Card.Text className="font-weight-bold">
+            <Card.Text
+              className="font-weight-bold"
+              style={{ fontSize: isMobile ? "0.9rem" : "" }}
+            >
               {product.newPrice ? (
                 <>
                   <span className="text-danger font-weight-bold">
