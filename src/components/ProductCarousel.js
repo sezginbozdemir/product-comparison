@@ -22,9 +22,9 @@ const ProductCarousel = ({ products, filters, title }) => {
   return (
     <>
       <h4 className="p-3">{title}</h4>
-      <Carousel>
+      <Carousel interval={null} slide={false}>
         {groupedProducts.map((productGroup, index) => (
-          <Carousel.Item interval={3000} key={index}>
+          <Carousel.Item key={index}>
             <Row className="justify-content-center">
               {productGroup.map((product) => (
                 <Col
