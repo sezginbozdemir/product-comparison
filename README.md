@@ -1,70 +1,50 @@
-# Getting Started with Create React App
+# Product Comparison Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a React-based application that fetches product data from multiple local CSV files and displays the products in a searchable and filterable list. The app provides a clean and responsive interface, built using React Bootstrap and Bootstrap CSS, to help users easily browse through a large set of products.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- **Fetch Products from CSV Files**: Product data is loaded from local CSV files.
+- **Product Listing**: Displays all products in a grid layout, with pagination support.
+- **Search Functionality**: Users can search for products by name, category, brand, and other filters.
+- **Filters**: Users can filter products based on various criteria (categories, brands, price, etc.).
+- **Mobile Responsive**: The app is fully responsive, using Bootstrap’s grid system and components.
+- **React Context API**: Centralized state management is handled using `useContext` to manage product and filter states.
 
-### `npm start`
+## Technologies Used
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **JavaScript (React)**: Core frontend development.
+- **React Bootstrap**: For the UI components like grid layouts, cards, and pagination.
+- **Bootstrap CSS**: For responsive styling.
+- **useContext**: To manage global states like the list of products and filters.
+- **CSV Parsing**: Products are fetched from local CSV files.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Installation
 
-### `npm test`
+1. **Clone the repository**:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+   ```bash
+   git clone https://https://github.com/sezginbozdemir/product-comparison
+   cd product-comparison
+   ```
 
-### `npm run build`
+2. **Install dependencies**:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+   ```bash
+   npm install
+   ```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+3. **Run the application**:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+   ```bash
+   npm start
+   ```
 
-### `npm run eject`
+   The app will run on [http://localhost:3000](http://localhost:3000).
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## How It Works
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- **Fetching Products**: On page load, the app fetches product data from multiple CSV files using the `fetch` API and parses them into usable JavaScript objects.
+- **State Management**: The React Context API is used to manage and update product lists, filters, and search results.
+- **Search and Filter**: The search bar allows users to filter products based on keywords, while category and brand filters help narrow down the results further.
+- **Pagination**: For better user experience, the product listing is paginated.
