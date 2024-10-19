@@ -5,10 +5,10 @@ This is a React-based application that fetches product data from multiple local 
 Live Demo deployed with AWS: https://d1q49nrom5koc3.cloudfront.net/
 ## Screenshots
 
-![Home Page](./public/homepage1)
+![Home Page](./public/homepage1.png)
 
 
-![Product List](./public/products1)
+![Product List](./public/products1.png)
 
 
 
